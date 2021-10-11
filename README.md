@@ -1,3 +1,2 @@
-# springjpapostgres
-Spring boot application with PostgreSQL
-web-application skeleton
+Web Spring boot application skeleton with PostgreSQL
+ 
