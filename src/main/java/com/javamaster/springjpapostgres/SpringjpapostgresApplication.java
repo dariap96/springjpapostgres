@@ -21,6 +21,7 @@ public class SpringjpapostgresApplication {
 		SpringApplication.run(SpringjpapostgresApplication.class, args);
 	}
 	@EventListener(ApplicationReadyEvent.class)
+
 	@Transactional
 	public void testJpaMethods(){
 		Address address = new Address();
@@ -41,11 +42,8 @@ public class SpringjpapostgresApplication {
 		userService.createUsers(users1);
 
 		userService.findAll().forEach(System.out::println);
-
 		userService.findAll().forEach(System.out::println);
-
 		userService.findWhereEmailIsGmail().forEach(System.out::println);
-
 		userService.findWhereNameStartsFromSmith().forEach(System.out::println);
 	}
 }
