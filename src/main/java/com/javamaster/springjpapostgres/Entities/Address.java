@@ -6,6 +6,14 @@ import javax.persistence.*;
 @Table(name = "address")
 public class Address {
 
+    public Address() {}
+
+    public Address(String city, String street, String homeNumber) {
+        this.city = city;
+        this.street = street;
+        this.homeNumber = homeNumber;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -1,15 +1,16 @@
 package com.javamaster.springjpapostgres.Services;
 import com.javamaster.springjpapostgres.Entities.Address;
-import com.javamaster.springjpapostgres.Repos.address_repo;
+import com.javamaster.springjpapostgres.Repos.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.transaction.Transactional;
 
-public class address_service {
+/*
+public class AddressService {
     @Autowired
-    private address_repo addressRepository;
+    private AddressRepository addressRepository;
     @Transactional
-    public void AddressService(address_repo addressRepository){
+    public void AddressService(AddressRepository addressRepository){
         this.addressRepository = addressRepository;
     }
     @Transactional
@@ -18,3 +19,4 @@ public class address_service {
     }
 
 }
+*/

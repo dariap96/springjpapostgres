@@ -3,21 +3,30 @@ import javax.persistence.*; //джава объекты в бд JPA
 
 @Entity
 @Table(name = "users")
+public class User {
 
-    public class Users {
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id;
+    public User() {}
 
-        @Column
-        private String name;
+    public User(String name, String email) {
+        this.name = name;
+        this.email = email;
+        this.address = null;
+    }
 
-        @Column
-        private String email;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-        @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-        @JoinColumn(name = "address_id")
-        private Address address;
+    @Column
+    private String name;
+
+    @Column
+    private String email;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id")
+    private Address address;
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -55,5 +64,4 @@ import javax.persistence.*; //джава объекты в бд JPA
                 ", address=" + address +
                 '}';
     }
-
 }

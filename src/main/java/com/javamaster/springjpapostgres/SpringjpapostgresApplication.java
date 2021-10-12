@@ -1,27 +1,43 @@
 package com.javamaster.springjpapostgres;
-import com.javamaster.springjpapostgres.Entities.Users;
+
 import com.javamaster.springjpapostgres.Entities.Address;
-import com.javamaster.springjpapostgres.Repos.address_repo;
-import com.javamaster.springjpapostgres.Repos.users_repo;
-import com.javamaster.springjpapostgres.Services.address_service;
-import com.javamaster.springjpapostgres.Services.users_service;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.javamaster.springjpapostgres.Entities.User;
+import com.javamaster.springjpapostgres.Repos.AddressRepository;
+import com.javamaster.springjpapostgres.Repos.UsersRepository;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
+import org.springframework.context.annotation.Bean;
 
-import javax.transaction.Transactional;
+import java.util.stream.Stream;
 
 @SpringBootApplication
 public class SpringjpapostgresApplication {
-	@Autowired
-	private users_service userService;
+
 	public static void main(String[] args) {
 		SpringApplication.run(SpringjpapostgresApplication.class, args);
 	}
-	@EventListener(ApplicationReadyEvent.class)
 
+	@Bean
+	CommandLineRunner init(UsersRepository usersRepository, AddressRepository addressRepository) {
+		return args -> {
+			Stream.of("John", "Julie", "Jennifer", "Helen", "Rachel").forEach(name -> {
+				User user = new User(name, name.toLowerCase() + "@domain.com");
+				Address address = new Address(name + "'s City", name + "'s Avenue", name + "'s Building");
+				user.setAddress(address);
+				usersRepository.save(user);
+				addressRepository.save(address);
+			});
+
+			// you ll get error if uncomment this line
+			//usersRepository.findAll().forEach(System.out::println);
+		};
+	}
+
+	//@Autowired
+	//private UsersService userService;
+	//@EventListener(ApplicationReadyEvent.class)
+	/*
 	@Transactional
 	public void testJpaMethods(){
 		Address address = new Address();
@@ -30,12 +46,12 @@ public class SpringjpapostgresApplication {
 		address.setStreet("Main Street");
 		Address address1 = new Address();
 		address1.setCity("Lviv");
-		Users users = new Users();
+		User users = new User();
 		users.setAddress(address);
 		users.setEmail("someEmail@gmail.com");
 		users.setName("Smith");
 		userService.createUsers(users);
-		Users users1 = new Users();
+		User users1 = new User();
 		users1.setName("Jon Dorian");
 		users1.setEmail("gmailEmail@gmail.com");
 		users1.setAddress(address1);
@@ -46,5 +62,6 @@ public class SpringjpapostgresApplication {
 		userService.findWhereEmailIsGmail().forEach(System.out::println);
 		userService.findWhereNameStartsFromSmith().forEach(System.out::println);
 	}
+	 */
 }
 
