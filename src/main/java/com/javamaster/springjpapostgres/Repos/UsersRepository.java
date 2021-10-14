@@ -1,4 +1,5 @@
 package com.javamaster.springjpapostgres.Repos;
+
 import com.javamaster.springjpapostgres.Entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -7,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface UsersRepository extends JpaRepository <User, Long> {
+public interface UsersRepository extends JpaRepository<User, Long> {
 
     @Query("select u from User u where u.email like '%@gmail.com%'")//если этого мало можно написать
         //собственный запрос на языке похожем на SQL

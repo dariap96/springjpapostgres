@@ -1,4 +1,6 @@
 package com.javamaster.springjpapostgres.Entities;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*; //джава объекты в бд JPA
 
 @Entity
@@ -23,6 +25,7 @@ public class User {
     @Column
     private String email;
 
+    @JsonIgnore //If u'll remove it you'll get json serialazer exeption
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
     private Address address;
